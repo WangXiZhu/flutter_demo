@@ -1,21 +1,29 @@
+// 直接导入
 import 'package:flutter/material.dart';
-import 'base.dart' as Base;
 
-void main () {
+// 命名空间
+import 'base.dart'
+as Base;
+
+// 条件导入
+import 'base.dart'
+if (dart.library.io) 'test.dart';
+
+void main() {
   // 1、必须逗号结尾
   print('Hello, world!123');
 
 
   // 2、定义函数。函数的返回类型可以不用显式声明，默认是void
-   test() {
-  
-  print('Hello, world!456');
+  test() {
 
-  Map<String, int> map1 = {
+    print('Hello, world!456');
+
+    Map < String, int > map1 = {
       'one': 1,
       'two': 2,
       'three': 3,
-  };
+    };
 
     print(map1);
 
@@ -36,13 +44,21 @@ void main () {
   Base.Async async1 = Base.Async();
   async1.run();
 
+
+  Base.DataStructure dataStructure = Base.DataStructure();
+  dataStructure.run();
+
+
   runApp(const MyApp());
 }
 
 
 
+// 02.01、无状态组件
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key
+  });
 
   // This widget is the root of your application.
   @override
@@ -73,8 +89,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// 02.02、有状态组件
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({
+    super.key,
+    required this.title
+  });
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -88,14 +108,16 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State < MyHomePage > createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+// 02.03、StatefulWidget
+class _MyHomePageState extends State < MyHomePage > {
   int _counter = -5;
   // var counter = 0;
 
   void _incrementCounter() {
+    // 02.04、 通过setState更新状态
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -104,15 +126,17 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
 
-      print('Spacecraft: $_counter' );
+      print('Spacecraft: $_counter');
     });
   }
 
-TextStyle bold24Roboto = const TextStyle(
-  color: Colors.red,
-  fontSize: 240,
-  fontWeight: FontWeight.bold,
-);
+  
+  TextStyle bold24Roboto =
+  const TextStyle(
+    color: Colors.red,
+    fontSize: 240,
+    fontWeight: FontWeight.bold,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -150,20 +174,20 @@ TextStyle bold24Roboto = const TextStyle(
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: < Widget > [
             const Text(
-              'You have pushed the button this many times 3132112:',
-            ),
-            Text(
-              '$_counter',
-              style: bold24Roboto,
-            ),
+                'You have pushed the button this many times 3132112:',
+              ),
+              Text(
+                '$_counter',
+                style: bold24Roboto,
+              ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
         tooltip: 'Increment',
+        onPressed: _incrementCounter,
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

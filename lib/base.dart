@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 // 声明函数
@@ -105,6 +106,10 @@ class Control{
 
 
 class Async{
+  // !! 使用 late 关键字声明，因为它会在 run() 方法中被初始化
+  // _subscription下划线表示私有变量。
+  late final StreamSubscription<int> _subscription; // 添加为类成员变量
+
   // 1、异步编程。 async是放在末尾!!!（花括号前面）
   run() async{
     printSelf('Async start');
@@ -138,12 +143,54 @@ class Async{
     // 3、Stream
     // 通过Timer的Periodic定时器来实现的
     // Stream: 声明一个异步数据流，返回一个Stream对象。
-    Stream<int> stream = Stream.periodic(Duration(seconds: 1), (count) => count);
+    Stream<int> stream = Stream.periodic(Duration(milliseconds: 500), (count) => count);
 
-    stream.listen((data) {
+    // ⚠️、在闭包中引用的变量需要声明之后才能使用了。我们需要使用顶级变量或者类成员变量来存储 StreamSubscription，然后才能调用cancel方法
+    // 
+    _subscription = stream.listen((data) {
       printSelf('stream : ' + data.toString());
+
+      if (data == 5) {
+        printSelf('stream cancel');
+        _subscription.cancel();
+      }
     });
 
     return 1;
   }
 }
+
+class DataStructure{
+  // 1、集合（范型）
+  // List: 有序集合，允许重复元素。
+  // Set: 无序集合，不允许重复元素。
+  // Map: 键值对集合，键唯一，值可以重复。
+
+  List<int> list = [1, 2, 3];
+  Set<int> set = {1, 2, 3};
+  Map<String, int> map = {
+    'one': 1,
+    'two': 2,
+    'three': 3,
+  };
+
+  // 2、显式类型
+  int a = 1;
+  bool b = true;
+  String c = 'Hello, World!';
+  double d = 1.0;
+
+  
+  
+  void run(){
+    // 3、类型转换
+    // int to string
+    Object e = 1;
+    int f = e as int;
+    
+    printSelf('f is String: $f');
+
+    
+  }
+}
+  
