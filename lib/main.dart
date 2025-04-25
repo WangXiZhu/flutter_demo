@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'base.dart' as Base;
 
- main() {
+void main () {
   // 1、必须逗号结尾
   print('Hello, world!123');
 

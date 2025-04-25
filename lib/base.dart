@@ -105,22 +105,28 @@ class Control{
 
 
 class Async{
-  // 1、异步编程。 async是放在末尾!!!
-   void run() async{
+  // 1、异步编程。 async是放在末尾!!!（花括号前面）
+  run() async{
+    printSelf('Async start');
+
     // 1、async/await
     // async: 声明一个异步函数，返回一个Future对象。
     // await: 等待一个Future对象完成，返回结果。
     Future<String> fetchData(String str) async {
-      return 'Hello, World! ' + str;
+      return 'Async Hello, World! ' + str;
     }
 
+    // 1.1 两种调用方式。方式1，使用then监听
+    // 1.2 方式2，使用await
     fetchData('1').then((value) {
       printSelf(value);
     });
     
-    print(await fetchData('2'));
+    printSelf(await fetchData('await 2'));
 
     // 2、Future
+    // Future: 声明一个异步操作，返回一个Future对象。
+    // 内部会new Timer(duration)的定时器，然后执行传入的函数，将返回的结果通过Future._complete返回
     Future<String> future = Future.delayed(Duration(seconds: 2), () {
       return 'Hello, World!';
     });
@@ -130,10 +136,14 @@ class Async{
     });
 
     // 3、Stream
+    // 通过Timer的Periodic定时器来实现的
+    // Stream: 声明一个异步数据流，返回一个Stream对象。
     Stream<int> stream = Stream.periodic(Duration(seconds: 1), (count) => count);
 
     stream.listen((data) {
-      printSelf(data.toString());
+      printSelf('stream : ' + data.toString());
     });
+
+    return 1;
   }
 }
