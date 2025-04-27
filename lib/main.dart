@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 
 // 命名空间
-import 'base.dart'
-as Base;
+import 'base.dart' as Base;
 
 // 条件导入
 import 'base.dart'
 if (dart.library.io) 'test.dart';
+
+// layout组件
+import './componnets/Layout.dart' as Layout;
 
 void main() {
   // 1、必须逗号结尾
@@ -176,12 +178,14 @@ class _MyHomePageState extends State < MyHomePage > {
           mainAxisAlignment: MainAxisAlignment.center,
           children: < Widget > [
             const Text(
-                'You have pushed the button this many times 3132112:',
+                'You have pushed the button this many times:',
               ),
               Text(
                 '$_counter',
                 style: bold24Roboto,
               ),
+
+              Layout.Layout(),
           ],
         ),
       ),
